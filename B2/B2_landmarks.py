@@ -16,9 +16,9 @@ labels_filename = 'labels_cartoon.csv'
 
 detector = dlib.get_frontal_face_detector()
 
-temp_dir = './Data'
+temp_dir = './landmarks'
 predictor_dir = os.path.join(temp_dir, 'shape_predictor_68_face_landmarks.dat')
-predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor(predictor_dir)
 
 
 def run_dlib_shape(image):

@@ -11,8 +11,7 @@ import pickle
 from sklearn.preprocessing import StandardScaler
 
 os.chdir('..')
-print(os.path.abspath(os.curdir))
-from data_A2 import get_data
+from data_B1 import get_data
 tr_X_B1, te_X_B1, tr_Y_B1, te_Y_B1 = get_data()
 
 

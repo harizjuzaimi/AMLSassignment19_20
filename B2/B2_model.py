@@ -19,7 +19,7 @@ def SVM_B2(training_images, training_labels, test_images, test_labels):
     cv_score = classifierB2.cv_results_
 
     # prediction using best classifier choose by GridSearchCV
-    predB2 = classifierB1.best_estimator_.predict(test_images)
+    predB2 = classifierB2.best_estimator_.predict(test_images)
 
     acc_B2_test = accuracy_score(test_labels, predB2)
 
