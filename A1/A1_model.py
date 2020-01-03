@@ -1,10 +1,7 @@
 from sklearn import svm, datasets
 from sklearn.metrics import classification_report,accuracy_score
-from sklearn.svm import SVC
-
 from sklearn.model_selection import GridSearchCV
-from sklearn import preprocessing
-from sklearn.preprocessing import StandardScaler
+
 
 
 def SVM_A1(training_images, training_labels, test_images, test_labels):
