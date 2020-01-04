@@ -11,16 +11,16 @@ def SVM_A1(training_images, training_labels, test_images, test_labels):
                         ]
 
 
-    classifier = GridSearchCV(svm.SVC(), tuned_parameters, n_jobs=-1)  # gridsearchCV use 3 k-fold by default
-    classifier.fit(training_images, training_labels)
+    classifierA1 = GridSearchCV(svm.SVC(), tuned_parameters, n_jobs=-1)  # gridsearchCV use 3 k-fold by default
+    classifierA1.fit(training_images, training_labels)
 
 # default score of SVM is accuracy
-    acc_A1_train = classifier.best_score_
+    acc_A1_train = classifierA1.best_score_
 
 # prediction using best classifier choose by GridSearchCV
-    pred = classifier.best_estimator_.predict(test_images)
+    predA1 = classifierA1.best_estimator_.predict(test_images)
 
-    acc_A1_test = accuracy_score(test_labels, pred)
+    acc_A1_test = accuracy_score(test_labels, predA1)
 
     return acc_A1_train, acc_A1_test
 

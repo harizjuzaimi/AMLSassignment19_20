@@ -1,5 +1,4 @@
 import re
-import cv2
 import dlib
 
 # regex that identify the part section of the xml
