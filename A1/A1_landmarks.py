@@ -5,13 +5,14 @@ import cv2
 import dlib
 
 # PATH TO ALL IMAGES
-global basedir, image_paths, target_size
-os.chdir('..')
-basedir = './Datasets'
-images_dir = os.path.join(basedir,'img_celeba')
-labels_filename = 'labels_celeba.csv'
+global basedir,temp_dir, image_paths, target_size
+basedir = './Data'
+temp_dir = os.path.join(basedir, 'celeba_test')
+images_dir = os.path.join(temp_dir,'img')
+labels_filename = 'labels.csv'
 
 detector = dlib.get_frontal_face_detector()
+os.chdir('..')
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 
 
@@ -102,7 +103,8 @@ def extract_features_labels():
     """
     image_paths = [os.path.join(images_dir, l) for l in os.listdir(images_dir)]
     target_size = None
-    labels_file = open(os.path.join(basedir, labels_filename), 'r')
+
+    labels_file = open(os.path.join(temp_dir, labels_filename), 'r')       ########
     lines = labels_file.readlines()
     gender_labels = {line.split('\t')[0] : int(line.split('\t')[2]) for line in lines[1:]}
 

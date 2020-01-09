@@ -4,7 +4,7 @@ from sklearn.model_selection import GridSearchCV
 
 
 
-def SVM_A1(training_images, training_labels, test_images, test_labels):
+def SVM_A1(training_images, training_labels):
     tuned_parameters = [{'kernel': ['linear'], 'C': [1, 10, 100]},
                         {'kernel': ['rbf'], 'gamma': [1e-3, 1e-4], 'C': [1, 10, 100]},
                         {'kernel': ['poly'], 'degree': [2, 3], 'C': [1, 10, 100]}
@@ -18,11 +18,10 @@ def SVM_A1(training_images, training_labels, test_images, test_labels):
     acc_A1_train = classifierA1.best_score_
 
 # prediction using best classifier choose by GridSearchCV
-    predA1 = classifierA1.best_estimator_.predict(test_images)
+    classifierA1_tuned = classifierA1.best_estimator_
 
-    acc_A1_test = accuracy_score(test_labels, predA1)
 
-    return acc_A1_train, acc_A1_test
+    return acc_A1_train, classifierA1_tuned
 
 
 
