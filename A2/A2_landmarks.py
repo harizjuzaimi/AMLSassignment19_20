@@ -5,28 +5,14 @@ import cv2
 import dlib
 
 # PATH TO ALL IMAGES
-global basedir, image_paths, target_size
-os.chdir('..')
-basedir = './Datasets'
-images_dir = os.path.join(basedir,'img_celeba')
-labels_filename = 'labels_celeba.csv'
+global basedir, temp_dir, image_paths, target_size
+basedir = './Data'
+temp_dir = os.path.join(basedir, 'celeba_test')
+images_dir = os.path.join(temp_dir, 'img')
+labels_filename = 'labels.csv'
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
-
-
-# how to find frontal human faces in an image using 68 landmarks.  These are points on the face such as the corners of the mouth, along the eyebrows, on the eyes, and so forth.
-
-# The face detector we use is made using the classic Histogram of Oriented
-# Gradients (HOG) feature combined with a linear classifier, an image pyramid,
-# and sliding window detection scheme.  The pose estimator was created by
-# using dlib's implementation of the paper:
-# One Millisecond Face Alignment with an Ensemble of Regression Trees by
-# Vahid Kazemi and Josephine Sullivan, CVPR 2014
-# and was trained on the iBUG 300-W face landmark dataset (see https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/):
-#     C. Sagonas, E. Antonakos, G, Tzimiropoulos, S. Zafeiriou, M. Pantic.
-#     300 faces In-the-wild challenge: Database and results.
-#     Image and Vision Computing (IMAVIS), Special Issue on Facial Landmark Localisation "In-The-Wild". 2016.
 
 
 def shape_to_np(shape, dtype="int"):
@@ -92,17 +78,10 @@ def run_dlib_shape(image):
     return dlibout, resized_image
 
 def extract_features_labels():
-    """
-    This funtion extracts the landmarks features for all images in the folder 'dataset/celeba'.
-    It also extracts the smiling label for each image.
-    :return:
-        landmark_features:  an array containing 68 landmark points for each image in which a face was detected
-        smiling_labels:      an array containing the smiling label (not smiling=0 and smiling=1) for each image in
-                            which a face was detected
-    """
+
     image_paths = [os.path.join(images_dir, l) for l in os.listdir(images_dir)]
     target_size = None
-    labels_file = open(os.path.join(basedir, labels_filename), 'r')
+    labels_file = open(os.path.join(temp_dir, labels_filename), 'r')
     lines = labels_file.readlines()
     smiling_labels = {line.split('\t')[0] : int(line.split('\t')[3]) for line in lines[1:]}
     # all_features = None
@@ -125,5 +104,6 @@ def extract_features_labels():
 
     landmark_features = np.array(all_features)
     smiling_labels = (np.array(all_labels) + 1)/2 # simply converts the -1 into 0, so not smiling=0 and smiling=1
+
     return landmark_features, smiling_labels
 

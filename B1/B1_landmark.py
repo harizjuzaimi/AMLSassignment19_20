@@ -5,11 +5,11 @@ import dlib
 import numpy as np
 
 # PATH TO ALL IMAGES
-global basedir, image_paths, target_size
-os.chdir('..')
-basedir = './Datasets'
-images_dir = os.path.join(basedir, 'img_cartoon')
-labels_filename = 'labels_cartoon.csv'
+global basedir, temp_dir, image_paths, target_size
+basedir = './Data'
+temp_dir = os.path.join(basedir, 'cartoon_set_test')
+images_dir = os.path.join(temp_dir, 'img')
+labels_filename = 'labels.csv'
 
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor('chin.dat')
@@ -86,7 +86,7 @@ def extract_features_labels():
     """
     image_paths = [os.path.join(images_dir, l) for l in os.listdir(images_dir)]
     target_size = None
-    labels_file = open(os.path.join(basedir, labels_filename), 'r')
+    labels_file = open(os.path.join(temp_dir, labels_filename), 'r')
     lines = labels_file.readlines()
     shape_labels = {line.split('\t')[0] : int(line.split('\t')[2]) for line in lines[1:]}
 
@@ -111,7 +111,7 @@ def extract_features_labels():
 
     landmark_features = np.array(all_features)
     shape_labels = np.array(all_labels)
-    return landmark_features, shape_labels, img_error
+    return landmark_features, shape_labels
 
 
 

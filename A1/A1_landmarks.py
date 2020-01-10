@@ -5,29 +5,14 @@ import cv2
 import dlib
 
 # PATH TO ALL IMAGES
-global basedir,temp_dir, image_paths, target_size
+global basedir, temp_dir, image_paths, target_size
 basedir = './Data'
 temp_dir = os.path.join(basedir, 'celeba_test')
-images_dir = os.path.join(temp_dir,'img')
+images_dir = os.path.join(temp_dir, 'img')
 labels_filename = 'labels.csv'
 
 detector = dlib.get_frontal_face_detector()
-os.chdir('..')
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
-
-
-# how to find frontal human faces in an image using 68 landmarks.  These are points on the face such as the corners of the mouth, along the eyebrows, on the eyes, and so forth.
-
-# The face detector we use is made using the classic Histogram of Oriented
-# Gradients (HOG) feature combined with a linear classifier, an image pyramid,
-# and sliding window detection scheme.  The pose estimator was created by
-# using dlib's implementation of the paper:
-# One Millisecond Face Alignment with an Ensemble of Regression Trees by
-# Vahid Kazemi and Josephine Sullivan, CVPR 2014
-# and was trained on the iBUG 300-W face landmark dataset (see https://ibug.doc.ic.ac.uk/resources/facial-point-annotations/):
-#     C. Sagonas, E. Antonakos, G, Tzimiropoulos, S. Zafeiriou, M. Pantic.
-#     300 faces In-the-wild challenge: Database and results.
-#     Image and Vision Computing (IMAVIS), Special Issue on Facial Landmark Localisation "In-The-Wild". 2016.
 
 
 def shape_to_np(shape, dtype="int"):
@@ -103,7 +88,6 @@ def extract_features_labels():
     """
     image_paths = [os.path.join(images_dir, l) for l in os.listdir(images_dir)]
     target_size = None
-
     labels_file = open(os.path.join(temp_dir, labels_filename), 'r')       ########
     lines = labels_file.readlines()
     gender_labels = {line.split('\t')[0] : int(line.split('\t')[2]) for line in lines[1:]}
