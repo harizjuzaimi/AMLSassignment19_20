@@ -66,5 +66,5 @@ def extract_features_labels():
                 img_error.append(file_name)
 
     landmark_features = np.array(all_features)
-    colour_labels = np.array(all_labels)  # simply converts the -1 into 0, so male=1 and female=0
+    colour_labels = np.array(all_labels)
     return landmark_features, colour_labels
