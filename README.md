@@ -38,4 +38,4 @@ Illustrates example of images for feature extraction<br />
 chin.dat, eye.dat and shape_predictor_68_face_landmarks.dat is the file use for shape predictor for task B1, B2, and both A1, A2 respectively
 
 # Required Libraries
-Scikit-learn, Scikit-image, OpenCV, Dlib, os, Numpy, Keras
+Scikit-learn, Scikit-image, opencv-python, Dlib, Numpy, Keras, pickle, os
